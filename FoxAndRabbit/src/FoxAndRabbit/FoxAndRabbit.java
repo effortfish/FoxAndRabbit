@@ -9,12 +9,16 @@ import field.Location;
 import field.View;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class FoxAndRabbit
 {
     private Field thefield;
     private View theview;
+    private JFrame frame;
 
     public FoxAndRabbit(int size)
     {
@@ -35,11 +39,21 @@ public class FoxAndRabbit
             }
         }
         theview = new View(thefield);
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setTitle("FoxAndRabbit");
         frame.add(theview);
+        JButton btnSetp = new JButton("Single step");
+        frame.add(btnSetp, BorderLayout.NORTH);
+        btnSetp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("touch ");
+                step();
+                frame.repaint();
+            }
+        });
         frame.pack();
         frame.setVisible(true);
     }
@@ -105,6 +119,6 @@ public class FoxAndRabbit
 
     public static void main(String[] args) {
         FoxAndRabbit fnr = new FoxAndRabbit(30);
-        fnr.start(10);
+        //fnr.start(10);
     }
 }
